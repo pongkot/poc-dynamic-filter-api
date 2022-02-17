@@ -3,8 +3,10 @@ import { CampaignsService } from './campaigns.service';
 import { Repository, Service } from '../contants';
 import { CampaignsRepository } from './campaigns.repository';
 import { CampaignsController } from './campaigns.controller';
+import { OperatorsModule } from '../operators/operators.module';
 
 @Module({
+  imports: [OperatorsModule],
   providers: [
     {
       provide: Service.Campaign,
@@ -15,6 +17,7 @@ import { CampaignsController } from './campaigns.controller';
       useClass: CampaignsRepository,
     },
   ],
+  exports: [Repository.Campaign],
   controllers: [CampaignsController],
 })
 export class CampaignsModule {}

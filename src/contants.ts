@@ -1,5 +1,5 @@
 export enum ActionName {
-  FetchCampaignById = 'fetchCampaignById',
+  getCampaignById = 'getCampaignById',
   FetchPolicyByPolicyNumber = 'fetchPolicyByPolicyNumber',
   GenerateCouponByECodeId = 'generateCouponByECodeId',
 }
@@ -20,4 +20,5 @@ export enum Repository {
 
 export enum Service {
   Campaign = 'campaignService',
+  Operator = 'operatorService',
 }
