@@ -17,22 +17,17 @@ export class CampaignsService extends CampaignsEntity {
     super();
   }
 
-  // async checkOut(checkOutData: ICheckOutData): Promise<IOperatorExecute> {
-  //   const { campaignId } = checkOutData;
-  //   const [{ operatorSet }] = await this.campaignRepository.findAll({
-  //     where: { id: campaignId },
-  //   });
-  //   return this.operatorExecute(checkOutData, operatorSet);
-  // }
+  async checkOut(checkOutData: ICheckOutData): Promise<IOperatorExecute> {
+    const { campaignId } = checkOutData;
+    const [{ operatorSet }] = await this.campaignRepository.findAll({
+      where: { id: campaignId },
+    });
+    return this.operatorExecute(checkOutData, operatorSet);
+  }
 
-  static registerFilterOperatorControl(): Array<{
-    name: any;
-    required?: Array<any>;
-    callback: (
-      data: ICheckOutData,
-      store: any,
-    ) => Promise<{ next: boolean; emit?: any }> | { next: boolean; emit?: any };
-  }> {
+  static registerFilterOperatorControl(): Array<
+    IRegisterOperatorControl<FilterName>
+  > {
     return [
       {
         name: FilterName.IsCampaignAvailable,
@@ -52,7 +47,7 @@ export class CampaignsService extends CampaignsEntity {
         },
       },
       {
-        name: 'A',
+        name: FilterName.IsCampaignAvailable,
         required: [],
         callback: async (data: ICheckOutData, store: any) => {
           console.log({ data, store });
@@ -62,6 +57,8 @@ export class CampaignsService extends CampaignsEntity {
           const a = await getA;
           return {
             next: true,
+            codeStatus: 200,
+            message: 'Successful',
             emit: {
               a,
             },
@@ -71,28 +68,30 @@ export class CampaignsService extends CampaignsEntity {
     ];
   }
 
-  // static registerActionOperatorControl(): Array<
-  //   IRegisterOperatorControl<ActionName>
-  // > {
-  //   // TODO implement for easy to use
-  //   return [
-  //     {
-  //       name: ActionName.FetchCampaignById,
-  //       required: [],
-  //       callback: async (data: ICheckOutData, store: any) => {
-  //         console.log({ data, store });
-  //         return {
-  //           next: true,
-  //           emit: {
-  //             campaign: {
-  //               name: 'discount 10 bath',
-  //               start: new Date('2022-01-01'),
-  //               end: new Date('2022-02-01'),
-  //             },
-  //           },
-  //         };
-  //       },
-  //     },
-  //   ];
-  // }
+  static registerActionOperatorControl(): Array<
+    IRegisterOperatorControl<ActionName>
+  > {
+    // TODO implement for easy to use
+    return [
+      {
+        name: ActionName.FetchCampaignById,
+        required: [],
+        callback: async (data: ICheckOutData, store: any) => {
+          console.log({ data, store });
+          return {
+            next: true,
+            codeStatus: 200,
+            message: 'Successful',
+            emit: {
+              campaign: {
+                name: 'discount 10 bath',
+                start: new Date('2022-01-01'),
+                end: new Date('2022-02-01'),
+              },
+            },
+          };
+        },
+      },
+    ];
+  }
 }

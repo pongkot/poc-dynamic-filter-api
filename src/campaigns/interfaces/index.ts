@@ -1,19 +1,14 @@
-import { ActionName, FilterName } from '../../contants';
-
-export type TOperator<TEmit> = (
-  data: ICheckOutData,
-  store: any,
-) => {
+export type TOperator = {
   next: boolean;
+  emit?: any;
   codeStatus?: number;
   message?: string;
-  emit?: TEmit;
 };
 
 export interface IRegisterOperatorControl<TFilterActionName> {
   name: TFilterActionName;
-  required?: Array<ActionName | FilterName>;
-  callback: TOperator<any> | Promise<TOperator<any>>;
+  required?: Array<any>;
+  callback: (data: ICheckOutData, store: any) => Promise<TOperator> | TOperator;
 }
 
 export interface ICheckOutData {
