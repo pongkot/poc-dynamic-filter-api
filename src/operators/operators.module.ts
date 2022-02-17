@@ -1,8 +1,10 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { OperatorsService } from './operators.service';
 import { Service } from '../contants';
+import { CampaignsModule } from '../campaigns/campaigns.module';
 
 @Module({
+  imports: [forwardRef(() => CampaignsModule)],
   providers: [
     {
       provide: Service.Operator,

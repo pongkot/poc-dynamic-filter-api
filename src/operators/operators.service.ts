@@ -1,13 +1,17 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ICampaign, ICheckOutData } from '../campaigns/interfaces';
-import { ActionName, FilterName } from '../contants';
+import { ActionName, FilterName, Repository } from '../contants';
 import { OperatorsBase, TOperatorControl } from './operators.base';
+import { CampaignsRepository } from '../campaigns/campaigns.repository';
 
 @Injectable()
 export class OperatorsService extends OperatorsBase {
   private readonly logger = new Logger('OperatorsService');
 
-  constructor() {
+  constructor(
+    @Inject(Repository.Campaign)
+    private readonly campaignsRepository: CampaignsRepository,
+  ) {
     super();
     this.setOperators([
       ...[this.getCampaignByIdAction()],
@@ -21,10 +25,9 @@ export class OperatorsService extends OperatorsBase {
       required: [],
       callback: async (data: ICheckOutData, store: unknown) => {
         const { campaignId } = data;
-        // const [campaign] = await this.campaignRepository.findAll({
-        //   where: { id: campaignId },
-        // });
-        const campaign = {};
+        const [campaign] = await this.campaignsRepository.findAll({
+          where: { id: campaignId },
+        });
         this.logger.log(`Get campaign id ${campaignId}`);
         this.logger.debug(`${{ campaign }}`);
         return {
