@@ -63,6 +63,9 @@ export class CampaignsBase {
         emit,
       } = await operator.callback(checkOutData, store);
 
+      codeStatus = cs;
+      message = m;
+
       if (!next) {
         if (cs) {
           codeStatus = cs;
