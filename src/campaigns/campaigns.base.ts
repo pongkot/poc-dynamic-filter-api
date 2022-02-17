@@ -56,6 +56,22 @@ export class CampaignsBase {
 
     for (const operator of operators) {
       // TODO implement requires stage
+      const currentOperator = operator.name;
+      const currentOperatorPosition = operatorSet.indexOf(currentOperator);
+      const requiredOperatorPositions = operator.required.map((operator) =>
+        operatorSet.indexOf(operator),
+      );
+
+      if (requiredOperatorPositions.length > 0) {
+        console.log(requiredOperatorPositions, currentOperatorPosition);
+      }
+
+      // console.log({
+      //   currentOperator,
+      //   currentOperatorPosition,
+      //   requiredOperatorPositions,
+      // });
+
       const {
         next,
         codeStatus: cs,
