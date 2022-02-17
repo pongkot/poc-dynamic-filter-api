@@ -1,11 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-
-export interface ICampaign {
-  id: number;
-  operatorSet: Array<string>; // TODO should be replace with foreign key
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { ICampaign } from './interfaces';
 
 @Injectable()
 export class CampaignsRepository {
@@ -23,18 +17,21 @@ export class CampaignsRepository {
       {
         id: 1,
         operatorSet: ['fetchCampaignById', 'isCampaignAvailable'],
+        partner: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 2,
         operatorSet: ['fetchCampaignById', 'isCampaignAvailable'],
+        partner: 2,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 3,
         operatorSet: ['fetchCampaignById', 'isCampaignAvailable'],
+        partner: 3,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
