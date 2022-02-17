@@ -17,9 +17,9 @@ export class CampaignsBase {
     IRegisterOperatorControl<ActionName | FilterName>
   > {
     const operator = new Map();
-    const filterActionBucket = this.registerOperatorControl;
-    for (const filterActionItem of filterActionBucket) {
-      const { name, required, callback } = filterActionItem;
+    const operatorControls = this.registerOperatorControl;
+    for (const operatorControl of operatorControls) {
+      const { name, required, callback } = operatorControl;
       operator.set(name, {
         name,
         required,
