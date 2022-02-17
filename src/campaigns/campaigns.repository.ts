@@ -16,7 +16,7 @@ export class CampaignsRepository {
     const campaigns: Array<ICampaign> = [
       {
         id: 1,
-        operatorSet: ['fetchCampaignById', 'isCampaignAvailable'],
+        operatorSet: ['getCampaignById', 'isCampaignAvailable'],
         partner: 1,
         start: new Date(),
         end: new Date(),
@@ -25,7 +25,7 @@ export class CampaignsRepository {
       },
       {
         id: 2,
-        operatorSet: ['fetchCampaignById', 'isCampaignAvailable'],
+        operatorSet: ['getCampaignById', 'isCampaignAvailable'],
         partner: 2,
         start: new Date(),
         end: new Date(),
@@ -34,7 +34,7 @@ export class CampaignsRepository {
       },
       {
         id: 3,
-        operatorSet: ['fetchCampaignById', 'isCampaignAvailable'],
+        operatorSet: ['getCampaignById', 'isCampaignAvailable'],
         partner: 3,
         start: new Date(),
         end: new Date(),

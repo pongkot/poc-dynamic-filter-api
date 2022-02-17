@@ -14,7 +14,9 @@ export class OperatorsService extends OperatorsBase {
   ) {
     super();
     this.setOperators([
+      // Register action operators
       ...[this.getCampaignByIdAction()],
+      // Register filter operators
       ...[this.isCampaignAvailableFilter()],
     ]);
   }
@@ -29,7 +31,7 @@ export class OperatorsService extends OperatorsBase {
           where: { id: campaignId },
         });
         this.logger.log(`Get campaign id ${campaignId}`);
-        this.logger.debug(`${{ campaign }}`);
+        this.logger.debug(`Campaign: ${JSON.stringify(campaign, null, 2)}`);
         return {
           next: true,
           emit: {
@@ -43,18 +45,19 @@ export class OperatorsService extends OperatorsBase {
   private isCampaignAvailableFilter(): TOperatorControl {
     return {
       name: FilterName.IsCampaignAvailable,
-      required: [],
+      required: [ActionName.getCampaignById],
       callback: async (data: ICheckOutData, store: { campaign: ICampaign }) => {
         const submitDate = new Date();
         const {
           campaign: { start, end },
         } = store;
+        const next =
+          submitDate.getTime() >= start.getTime() &&
+          submitDate.getTime() <= end.getTime();
         return {
-          next:
-            submitDate.getTime() >= start.getTime() &&
-            submitDate.getTime() <= end.getTime(),
-          codeStatus: 200,
-          message: 'Successful',
+          next,
+          codeStatus: next ? 200 : 401,
+          message: next ? 'Successful' : 'Campaign is not available',
         };
       },
     };

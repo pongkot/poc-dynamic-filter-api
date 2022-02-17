@@ -8,12 +8,6 @@ import {
 
 export class CampaignsBase {
   protected readonly logger = new Logger('CampaignsBase');
-  // private registerActionOperatorControl: Array<
-  //   IRegisterOperatorControl<ActionName>
-  // >;
-  // private registerFilterOperatorControl: Array<
-  //   IRegisterOperatorControl<FilterName>
-  // >;
   private registerOperatorControl: Array<
     IRegisterOperatorControl<FilterName | ActionName>
   >;
@@ -38,10 +32,15 @@ export class CampaignsBase {
   protected getOperatorByOperatorSet(
     operatorSet: Array<string>,
   ): Array<IRegisterOperatorControl<ActionName | FilterName>> {
-    const result = [];
+    const result: Array<IRegisterOperatorControl<ActionName | FilterName>> = [];
     const operatorControl = this.getOperatorControl();
     for (const operatorName of operatorSet) {
-      result.push(operatorControl.get(operatorName));
+      const { name, required, callback } = operatorControl.get(operatorName);
+      result.push({
+        name,
+        required,
+        callback,
+      });
     }
     return result;
   }
@@ -73,7 +72,7 @@ export class CampaignsBase {
           message = m;
         }
 
-        this.logger.log(`Operator ${operator.name} crashing`);
+        this.logger.error(`Operator ${operator.name} failed`);
         break;
       }
 
@@ -82,88 +81,15 @@ export class CampaignsBase {
         this.logger.log(`Operator ${operator.name} emit data`);
       }
 
-      this.logger.log(`Operator ${operator.name} finish`);
+      this.logger.log(`Operator ${operator.name} successful`);
     }
 
     return { codeStatus, message };
   }
-
-  // setRegisterActionOperatorControl(operatorList: any): void {
-  //   this.registerActionOperatorControl = operatorList;
-  // }
-  //
-  // setRegisterFilterOperatorControl(operatorList: any): void {
-  //   this.registerFilterOperatorControl = operatorList;
-  // }
 
   setRegisterOperatorControl(
     operator: Array<IRegisterOperatorControl<FilterName | ActionName>>,
   ): void {
     this.registerOperatorControl = operator;
   }
-
-  // protected registerFilterOperatorControl(): Array<
-  //   IRegisterOperatorControl<FilterName>
-  // > {
-  //   return [
-  //     {
-  //       name: FilterName.IsCampaignAvailable,
-  //       required: [],
-  //       callback: (
-  //         data: ICheckOutData,
-  //         store: { campaign: { name: string; start: Date; finish: Date } },
-  //       ) => {
-  //         const {
-  //           campaign: { name, start, finish },
-  //         } = store;
-  //         const c = { name, start, finish };
-  //         console.log({ data, c });
-  //         return {
-  //           next: true,
-  //         };
-  //       },
-  //     },
-  //     {
-  //       name: FilterName.IsCampaignAvailable,
-  //       required: [],
-  //       callback: async (data: ICheckOutData, store: any) => {
-  //         console.log({ data, store });
-  //         const getA = new Promise((resolve) => {
-  //           resolve('a');
-  //         });
-  //         const a = await getA;
-  //         return {
-  //           next: true,
-  //           codeStatus: 200,
-  //           message: 'Successful',
-  //           emit: {
-  //             a,
-  //           },
-  //         };
-  //       },
-  //     },
-  //   ];
-  // }
-
-  // protected registerActionOperatorControl(): Array<
-  //   IRegisterOperatorControl<ActionName>
-  // > {
-  //   // TODO implement for easy to use
-  //   return [
-  //     {
-  //       name: ActionName.FetchCampaignById,
-  //       required: [],
-  //       callback: async (data: ICheckOutData, store: any) => {
-  //         const { campaignId } = data;
-  //         console.log({ data, store });
-  //         return {
-  //           next: true,
-  //           emit: {
-  //             campaignId,
-  //           },
-  //         };
-  //       },
-  //     },
-  //   ];
-  // }
 }
