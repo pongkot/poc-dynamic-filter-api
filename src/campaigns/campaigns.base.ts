@@ -55,22 +55,20 @@ export class CampaignsBase {
     const operators = this.getOperatorByOperatorSet(operatorSet);
 
     for (const operator of operators) {
-      // TODO implement requires stage
       const currentOperator = operator.name;
-      const currentOperatorPosition = operatorSet.indexOf(currentOperator);
-      const requiredOperatorPositions = operator.required.map((operator) =>
-        operatorSet.indexOf(operator),
+      const currentRequired = operator.required;
+      const currentOperatorAddress = operatorSet.indexOf(currentOperator);
+      const currentRequiredAddressList = currentRequired.map((required) =>
+        operatorSet.indexOf(required),
       );
+      const result = currentRequiredAddressList
+        .map((i: number) => i - currentOperatorAddress)
+        .map((i: number) => i <= -1)
+        .every((i: boolean) => i);
 
-      if (requiredOperatorPositions.length > 0) {
-        console.log(requiredOperatorPositions, currentOperatorPosition);
+      if (!result) {
+        throw new Error('Required operator invalid');
       }
-
-      // console.log({
-      //   currentOperator,
-      //   currentOperatorPosition,
-      //   requiredOperatorPositions,
-      // });
 
       const {
         next,
