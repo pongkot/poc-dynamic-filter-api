@@ -19,14 +19,14 @@ Please follow nest.js document
 
 ### Original
 
-|  #  | httpStatus | code | message | description |
-|:---:|:----------:|:----:|:-------:|:-----------:|
-|  1  |    200     |  1   |    1    |      1      |
-|  1  |    200     |  1   |    1    |      1      |
-|  1  |    200     |  1   |    1    |      1      |
-|  1  |    200     |  1   |    1    |      1      |
-|  1  |    200     |  1   |    1    |      1      |
-|  1  |    200     |  1   |    1    |      1      |
+|  #  | httpStatus | code | message                          | description |
+|:---:|:----------:|:----:|----------------------------------|-------------|
+|  1  |    200     | 200  | ECode sending to your mobile     |             |
+|  2  |    200     | 400  | sorry, checked ECode failed      |             |
+|  3  |    200     | 401  | campaign unavailable             |             |
+|  4  |    200     | 402  | sorry, ECode out of stock        |             |
+|  5  |    200     | 403  | sorry, your policy is invalid    |             |
+|  6  |    200     | 404  | sorry, you are checked out ECode |             |
 
 *code that mean code of message, not http code
 
