@@ -16,6 +16,7 @@ export enum FilterName {
 
 export enum Repository {
   Campaign = 'campaignRepository',
+  Operator = 'operatorRepository',
 }
 
 export enum Service {
