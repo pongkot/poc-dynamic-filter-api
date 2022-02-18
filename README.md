@@ -34,10 +34,10 @@ Please follow nest.js document
 
 |  #  | httpStatus | statusCode |        message        |                                  description                                   |
 |:---:|:----------:|:----------:|:---------------------:|:------------------------------------------------------------------------------:|
-|  1  |    200     |    200     |           1           |                                       1                                        |
-|  1  |    200     |    200     |           1           |                                       1                                        |
-|  1  |    200     |    200     |           1           |                                       1                                        |
-|  1  |    200     |    200     |           1           |                                       1                                        |
-|  1  |    200     |    200     |           1           |                                       1                                        |
-|  1  |    200     |    200     |           1           |                                       1                                        |
-|  1  |    500     |    500     | Internal server error | Something wrong about operator or application. please look up at error message |
+|  1  |    201     |    200     |          n/a          |                                                                                |
+|  2  |    201     |    400     |          n/a          |                                                                                |
+|  3  |    201     |    401     |          n/a          |                                                                                |
+|  4  |    201     |    402     |          n/a          |                                                                                |
+|  5  |    201     |    403     |          n/a          |                                                                                |
+|  6  |    201     |    404     |          n/a          |                                                                                |
+|  7  |    500     |    500     | Internal server error | Something wrong about operator or application. please look up at error message |

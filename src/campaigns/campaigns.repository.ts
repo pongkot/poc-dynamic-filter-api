@@ -16,7 +16,7 @@ export class CampaignsRepository {
     const campaigns: Array<ICampaign> = [
       {
         id: 1,
-        operatorSet: ['isCampaignAvailable', 'getCampaignById'],
+        operatorSet: ['getCampaignById', 'isCampaignAvailable'],
         partner: 1,
         start: new Date('2022-01-01'),
         end: new Date('2022-01-31'),
