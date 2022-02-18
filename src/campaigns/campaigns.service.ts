@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository, Service } from '../contants';
 import { CampaignsRepository } from './campaigns.repository';
-import { CampaignsBase } from './campaigns.base';
+import { CampaignsServiceBase } from './campaigns.service.base';
 import { ICheckOutData, IOperatorExecute } from './interfaces';
 import { OperatorsService } from '../operators/operators.service';
 
 @Injectable()
-export class CampaignsService extends CampaignsBase {
+export class CampaignsService extends CampaignsServiceBase {
   constructor(
     @Inject(Repository.Campaign)
     private readonly campaignsRepository: CampaignsRepository,

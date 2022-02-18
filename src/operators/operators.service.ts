@@ -1,11 +1,14 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ICampaign, ICheckOutData } from '../campaigns/interfaces';
 import { ActionName, FilterName, Repository } from '../contants';
-import { OperatorsBase, TOperatorControl } from './operators.base';
+import {
+  OperatorsServiceBase,
+  TOperatorControl,
+} from './operators.service.base';
 import { CampaignsRepository } from '../campaigns/campaigns.repository';
 
 @Injectable()
-export class OperatorsService extends OperatorsBase {
+export class OperatorsService extends OperatorsServiceBase {
   private readonly logger = new Logger('OperatorsService');
 
   constructor(

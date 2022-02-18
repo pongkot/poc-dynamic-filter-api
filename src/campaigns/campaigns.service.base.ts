@@ -6,7 +6,7 @@ import {
   IRegisterOperatorControl,
 } from './interfaces';
 
-export class CampaignsBase {
+export class CampaignsServiceBase {
   protected readonly logger = new Logger('CampaignsBase');
   private registerOperatorControl: Array<
     IRegisterOperatorControl<FilterName | ActionName>
@@ -61,12 +61,12 @@ export class CampaignsBase {
       const currentRequiredAddressList = currentRequired.map((required) =>
         operatorSet.indexOf(required),
       );
-      const result = currentRequiredAddressList
+      const isRequiredOperatorValid = currentRequiredAddressList
         .map((i: number) => i - currentOperatorAddress)
         .map((i: number) => i <= -1)
         .every((i: boolean) => i);
 
-      if (!result) {
+      if (!isRequiredOperatorValid) {
         throw new Error('Required operator invalid');
       }
 

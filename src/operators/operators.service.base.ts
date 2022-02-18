@@ -5,7 +5,7 @@ export type TOperatorControl = IRegisterOperatorControl<
   FilterName | ActionName
 >;
 
-export class OperatorsBase {
+export class OperatorsServiceBase {
   private operators: Array<TOperatorControl>;
 
   setOperators(operators: Array<TOperatorControl>): void {
