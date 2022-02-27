@@ -1,6 +1,6 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ICampaign, ICheckOutData } from '../campaigns/interfaces';
-import { ActionName, FilterName, Repository } from '../contants';
+import { ActionName, FilterMessage, FilterName, Repository } from '../contants';
 import {
   OperatorsServiceBase,
   TOperatorControl,
@@ -26,7 +26,7 @@ export class OperatorsService extends OperatorsServiceBase {
 
   private getCampaignByIdAction(): TOperatorControl {
     return {
-      name: ActionName.getCampaignById,
+      name: ActionName.GetCampaignById,
       required: [],
       callback: async (data: ICheckOutData, store: unknown) => {
         const { campaignId } = data;
@@ -48,7 +48,7 @@ export class OperatorsService extends OperatorsServiceBase {
   private isCampaignAvailableFilter(): TOperatorControl {
     return {
       name: FilterName.IsCampaignAvailable,
-      required: [ActionName.getCampaignById],
+      required: [ActionName.GetCampaignById],
       callback: async (data: ICheckOutData, store: { campaign: ICampaign }) => {
         const submitDate = new Date();
         const {
@@ -59,8 +59,10 @@ export class OperatorsService extends OperatorsServiceBase {
           submitDate.getTime() <= end.getTime();
         return {
           next,
-          codeStatus: next ? 200 : 401,
-          message: next ? 'Successful' : 'Campaign is not available',
+          codeStatus: next ? 200 : FilterMessage.campaignUnavailable.statusCode,
+          message: next
+            ? 'Successful'
+            : FilterMessage.campaignUnavailable.message,
         };
       },
     };
