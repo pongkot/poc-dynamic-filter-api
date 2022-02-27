@@ -62,9 +62,9 @@ export class CampaignsServiceBase {
         operatorSet.indexOf(required),
       );
       const isRequiredOperatorValid = currentRequiredAddressList
-        .map((i: number) => i - currentOperatorAddress)
-        .map((i: number) => i <= -1)
-        .every((i: boolean) => i);
+        .map((item: number) => item - currentOperatorAddress)
+        .map((item: number) => item <= -1)
+        .every((item: boolean) => item);
 
       if (!isRequiredOperatorValid) {
         throw new Error('Required operator invalid');

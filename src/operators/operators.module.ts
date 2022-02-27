@@ -1,4 +1,4 @@
-import { forwardRef, Module, OnModuleInit } from '@nestjs/common';
+import { forwardRef, Logger, Module, OnModuleInit } from '@nestjs/common';
 import { OperatorsService } from './operators.service';
 import { ActionName, FilterName, Repository, Service } from '../contants';
 import { CampaignsModule } from '../campaigns/campaigns.module';
@@ -21,6 +21,7 @@ import { ModuleRef } from '@nestjs/core';
 })
 export class OperatorsModule implements OnModuleInit {
   private readonly operatorsRepository: OperatorsRepository;
+  private readonly logger = new Logger('OperatorsModule');
 
   constructor(private moduleRef: ModuleRef) {
     this.operatorsRepository = this.moduleRef.get(Repository.Operator);
@@ -38,7 +39,9 @@ export class OperatorsModule implements OnModuleInit {
     for (const operatorName of operatorOnDatabaseNames) {
       const isOperatorInControls = operatorControls.includes(operatorName);
       if (!isOperatorInControls) {
-        throw new Error(`${operatorName} is not in operator control list`);
+        const errorMessage = `Ops! ${operatorName} does not is in operator control list`;
+        this.logger.error(errorMessage);
+        throw new Error(errorMessage);
       }
     }
   }

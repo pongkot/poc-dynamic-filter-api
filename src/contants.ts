@@ -1,5 +1,5 @@
 export enum ActionName {
-  GetCampaignById = 'GetCampaignById',
+  GetCampaignById = 'getCampaignById',
   FetchPolicyByPolicyNumber = 'fetchPolicyByPolicyNumber',
   GenerateCouponByECodeId = 'generateCouponByECodeId',
 }
@@ -24,7 +24,7 @@ export enum Service {
   Operator = 'operatorService',
 }
 
-export const FilterMessage = {
+export const OperatorMessage = {
   sendECode: {
     statusCode: 200,
     message: 'ECode sending to mobile',

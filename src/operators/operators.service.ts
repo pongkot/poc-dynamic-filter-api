@@ -1,6 +1,11 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ICampaign, ICheckOutData } from '../campaigns/interfaces';
-import { ActionName, FilterMessage, FilterName, Repository } from '../contants';
+import {
+  ActionName,
+  OperatorMessage,
+  FilterName,
+  Repository,
+} from '../contants';
 import {
   OperatorsServiceBase,
   TOperatorControl,
@@ -59,10 +64,12 @@ export class OperatorsService extends OperatorsServiceBase {
           submitDate.getTime() <= end.getTime();
         return {
           next,
-          codeStatus: next ? 200 : FilterMessage.campaignUnavailable.statusCode,
+          codeStatus: next
+            ? 200
+            : OperatorMessage.campaignUnavailable.statusCode,
           message: next
             ? 'Successful'
-            : FilterMessage.campaignUnavailable.message,
+            : OperatorMessage.campaignUnavailable.message,
         };
       },
     };
