@@ -9,7 +9,7 @@ export class CampaignsController {
     private readonly campaignsService: CampaignsService,
   ) {}
 
-  @Post('/checkout/:campaignId')
+  @Post('/checkout/campaign/:campaignId')
   checkOut(
     @Param('campaignId')
     campaignId: number,
