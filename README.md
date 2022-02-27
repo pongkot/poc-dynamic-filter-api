@@ -43,3 +43,12 @@ Please follow nest.js document
 |  7  |    500     |    500     | Internal server error         | Something wrong about operator or application. please look up at error message |
 
 *statusCode that mean statusCode of message, not http code
+
+### Example API response
+
+```json
+{
+  "statusCode": 400,
+  "message": "Sorry, Check out ECode failed"
+}
+```
