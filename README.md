@@ -32,14 +32,14 @@ Please follow nest.js document
 
 ### Changes
 
-|  #  | httpStatus | statusCode | message               | description                                                                    |
-|:---:|:----------:|:----------:|-----------------------|--------------------------------------------------------------------------------|
-|  1  |    201     |    200     | n/a                   |                                                                                |
-|  2  |    201     |    400     | n/a                   |                                                                                |
-|  3  |    201     |    401     | n/a                   |                                                                                |
-|  4  |    201     |    402     | n/a                   |                                                                                |
-|  5  |    201     |    403     | n/a                   |                                                                                |
-|  6  |    201     |    404     | n/a                   |                                                                                |
-|  7  |    500     |    500     | Internal server error | Something wrong about operator or application. please look up at error message |
+|  #  | httpStatus | statusCode | message                       | description                                                                    |
+|:---:|:----------:|:----------:|-------------------------------|--------------------------------------------------------------------------------|
+|  1  |    201     |    200     | ECode sending to mobile       |                                                                                |
+|  2  |    201     |    400     | Sorry, Check out ECode failed |                                                                                |
+|  3  |    201     |    401     | Campaign unavailable          |                                                                                |
+|  4  |    201     |    402     | Sorry, ECode are out of stock |                                                                                |
+|  5  |    201     |    403     | Sorry, Policy is invalid      |                                                                                |
+|  6  |    201     |    404     | Sorry, Policy is checked out  |                                                                                |
+|  7  |    500     |    500     | Internal server error         | Something wrong about operator or application. please look up at error message |
 
 *statusCode that mean statusCode of message, not http code
