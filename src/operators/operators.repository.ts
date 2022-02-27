@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-interface IOperator {
+export interface IOperator {
   id: number;
   name: string;
   type: string;

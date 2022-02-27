@@ -2,7 +2,7 @@ import { forwardRef, Module, OnModuleInit } from '@nestjs/common';
 import { OperatorsService } from './operators.service';
 import { ActionName, FilterName, Repository, Service } from '../contants';
 import { CampaignsModule } from '../campaigns/campaigns.module';
-import { OperatorsRepository } from './operators.repository';
+import { IOperator, OperatorsRepository } from './operators.repository';
 import { ModuleRef } from '@nestjs/core';
 
 @Module({
@@ -27,17 +27,23 @@ export class OperatorsModule implements OnModuleInit {
   }
 
   async onModuleInit(): Promise<void> {
-    const actionNames = Object.keys(ActionName).map((n) => ActionName[n]);
-    const filterNames = Object.keys(FilterName).map((n) => FilterName[n]);
+    const actionNames = OperatorsModule.enumToList(ActionName);
+    const filterNames = OperatorsModule.enumToList(FilterName);
     const operatorControls = [...actionNames, ...filterNames];
     const operatorOnDatabase = await this.operatorsRepository.findAll();
-    const operatorOnDatabaseNames = operatorOnDatabase.map((n) => n.name);
+    const operatorOnDatabaseNames = operatorOnDatabase.map(
+      (operator: IOperator) => operator.name,
+    );
 
-    for (const opd of operatorOnDatabaseNames) {
-      const isIn = operatorControls.includes(opd);
-      if (!isIn) {
-        throw new Error(`${opd} is not in operator control list`);
+    for (const operatorName of operatorOnDatabaseNames) {
+      const isOperatorInControls = operatorControls.includes(operatorName);
+      if (!isOperatorInControls) {
+        throw new Error(`${operatorName} is not in operator control list`);
       }
     }
+  }
+
+  private static enumToList<T>(context: T): Array<string> {
+    return Object.keys(context).map((name: string) => context[name]);
   }
 }
