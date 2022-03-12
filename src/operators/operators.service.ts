@@ -23,9 +23,9 @@ export class OperatorsService extends OperatorsServiceBase {
     super();
     this.setOperators([
       // Register action operators
-      ...[this.getCampaignByIdAction()],
+      this.getCampaignByIdAction(),
       // Register filter operators
-      ...[this.isCampaignAvailableFilter()],
+      this.isCampaignAvailableFilter(),
     ]);
   }
 
